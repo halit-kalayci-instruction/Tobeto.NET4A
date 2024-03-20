@@ -1,0 +1,14 @@
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\bin\Debug\net8.0\ConsoleUI.exe
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\bin\Debug\net8.0\ConsoleUI.deps.json
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\bin\Debug\net8.0\ConsoleUI.runtimeconfig.json
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\bin\Debug\net8.0\ConsoleUI.dll
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\bin\Debug\net8.0\ConsoleUI.pdb
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.AssemblyInfoInputs.cache
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.AssemblyInfo.cs
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.csproj.CoreCompileInputs.cache
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.dll
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\refint\ConsoleUI.dll
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.pdb
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ConsoleUI.genruntimeconfig.cache
+C:\Users\klyyc\source\repos\Tobeto.NET4A\ConsoleUI\obj\Debug\net8.0\ref\ConsoleUI.dll

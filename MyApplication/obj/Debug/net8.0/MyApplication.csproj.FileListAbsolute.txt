@@ -1,0 +1,14 @@
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\bin\Debug\net8.0\MyApplication.exe
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\bin\Debug\net8.0\MyApplication.deps.json
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\bin\Debug\net8.0\MyApplication.runtimeconfig.json
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\bin\Debug\net8.0\MyApplication.dll
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\bin\Debug\net8.0\MyApplication.pdb
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.AssemblyInfoInputs.cache
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.AssemblyInfo.cs
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.csproj.CoreCompileInputs.cache
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.dll
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\refint\MyApplication.dll
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.pdb
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\MyApplication.genruntimeconfig.cache
+C:\Users\klyyc\source\repos\Tobeto.NET4A\MyApplication\obj\Debug\net8.0\ref\MyApplication.dll
