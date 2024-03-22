@@ -1,4 +1,5 @@
-﻿using MyApplication.Entities;
+﻿using Business;
+using MyApplication.Entities;
 using MyApplication.Services;
 
 // OOP Concepts ->  Access Modifiers, Constructor, Inheritance, Polymorphism
@@ -18,3 +19,4 @@ productService2.AddProductWithLogging(product);
 string text = Console.ReadLine();
 Console.WriteLine("Girilen değer:" + text);
 // Sen bir product servis olacaksan => şunu şunu yapacaksın.
+
