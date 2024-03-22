@@ -14,4 +14,3 @@ namespace MyApplication.Services
         public void DeleteProduct(Product product);
     }
 }
-// 6:05
