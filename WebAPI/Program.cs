@@ -1,6 +1,7 @@
 using Business.Abstracts;
 using Business.Concretes;
 using DataAccess.Abstracts;
+using DataAccess.Concretes.EntityFramework;
 using DataAccess.Concretes.InMemory;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,8 @@ builder.Services.AddSwaggerGen();
 
 // Transient => Her adýmda (her talepte) yeni 1 instance.
 builder.Services.AddSingleton<IProductService, ProductManager>();
-builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+builder.Services.AddSingleton<IProductRepository, EfProductRepository>();
+builder.Services.AddDbContext<BaseDbContext>();
 
 var app = builder.Build();
 
