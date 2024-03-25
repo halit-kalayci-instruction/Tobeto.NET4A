@@ -10,23 +10,24 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        IProductService productService; // ❌❌❌
+        IProductService _productService;
 
         public ProductsController(IProductService productService)
         {
-            this.productService = productService;
+            _productService = productService;
         }
 
         [HttpGet]
         public List<Product> GetAll()
         {
-            return productService.GetAll();
+            return _productService.GetAll();
         }
 
         [HttpPost]
         public void Add([FromBody] Product product)
         {
-            productService.Add(product);
+            _productService.Add(product);
         }
     }
 }
+// SOLID => S => SINGLE RESPONSIBILITY

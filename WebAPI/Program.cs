@@ -1,5 +1,7 @@
 using Business.Abstracts;
 using Business.Concretes;
+using DataAccess.Abstracts;
+using DataAccess.Concretes.InMemory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+// DataAccess - Entity Framework
 
 // Singleton-Scoped-Transient -> Lifetime
 // Singleton => Üretilen baðýmlýlýk uygulama açýk olduðu sürece tek bir kere newlenir. 
@@ -16,6 +21,7 @@ builder.Services.AddSwaggerGen();
 
 // Transient => Her adýmda (her talepte) yeni 1 instance.
 builder.Services.AddSingleton<IProductService, ProductManager>();
+builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 
 var app = builder.Build();
 
