@@ -25,7 +25,10 @@ namespace Entities
         public string Name { get; set; }
         public double UnitPrice { get; set; }
         public int Stock { get; set; }
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; } 
         public virtual Category Category { get; set; }
     }
 }
+// Proje Referansları ve Paketleri
+// PMC Default Project DataAccess
+// Connection String
