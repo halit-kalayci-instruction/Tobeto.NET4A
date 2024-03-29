@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Core.DataAccess
 {
@@ -32,14 +33,25 @@ namespace Core.DataAccess
             Context.SaveChanges();
         }
 
-        public List<TEntity> GetAll()
+        // Filter ✅
+        // OrderBy ?
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate)
         {
-            return Context.Set<TEntity>().ToList();
+            IQueryable<TEntity> data = Context.Set<TEntity>();
+
+            if(predicate != null)
+                data = data.Where(predicate);
+
+            return data.ToList();
         }
 
-        public TEntity? GetById(int id)
+        // Filter ✅
+        // OrderBy ?
+        public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
         {
-            return Context.Set<TEntity>().FirstOrDefault(i => i.Id == id);
+            IQueryable<TEntity> data = Context.Set<TEntity>();
+
+            return data.FirstOrDefault(predicate);
         }
     }
 }

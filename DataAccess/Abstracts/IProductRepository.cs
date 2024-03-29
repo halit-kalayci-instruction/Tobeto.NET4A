@@ -10,5 +10,6 @@ namespace DataAccess.Abstracts
 {
     public interface IProductRepository : IRepository<Product>
     {
+
     }
 }
