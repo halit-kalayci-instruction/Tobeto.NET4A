@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Product
+    public class Product : Entity
     {
         public Product()
         {
@@ -21,7 +22,6 @@ namespace Entities
             CategoryId = categoryId;
         }
 
-        public int Id { get; set; }
         public string Name { get; set; }
         public double UnitPrice { get; set; }
         public int Stock { get; set; }
