@@ -21,7 +21,7 @@ namespace Business.Concretes
             _productRepository = productRepository;
         }
 
-        public async void Add(Product product)
+        public async Task Add(Product product)
         {
             // ürün ismini kontrol et
             // fiyatını kontrol et
