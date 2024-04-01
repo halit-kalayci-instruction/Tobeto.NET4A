@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 namespace Core.DataAccess
 {
     // Constraints => Kısıt
-    public class EfRepositoryBase<TEntity, TContext> : IRepository<TEntity>
+    public class EfRepositoryBase<TEntity, TContext> : IRepository<TEntity>, IAsyncRepository<TEntity>
         where TContext : DbContext
         where TEntity : Entity
     {
@@ -35,7 +35,7 @@ namespace Core.DataAccess
 
         // Filter ✅
         // OrderBy ?
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate)
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null)
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
 
@@ -52,6 +52,41 @@ namespace Core.DataAccess
             IQueryable<TEntity> data = Context.Set<TEntity>();
 
             return data.FirstOrDefault(predicate);
+        }
+
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            IQueryable<TEntity> data = Context.Set<TEntity>();
+
+            return await data.FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null)
+        {
+            IQueryable<TEntity> data = Context.Set<TEntity>();
+
+            if (predicate != null)
+                data = data.Where(predicate);
+
+            return await data.ToListAsync();
+        }
+
+        public async Task AddAsync(TEntity entity)
+        {
+            await Context.AddAsync(entity);
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(TEntity entity)
+        {
+            Context.Update(entity);
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(TEntity entity)
+        {
+            Context.Remove(entity);
+            await Context.SaveChangesAsync();
         }
     }
 }
