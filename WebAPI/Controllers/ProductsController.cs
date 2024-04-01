@@ -16,7 +16,6 @@ namespace WebAPI.Controllers
         {
             _productService = productService;
         }
-
         [HttpGet]
         public async Task<List<Product>> GetAll()
         {

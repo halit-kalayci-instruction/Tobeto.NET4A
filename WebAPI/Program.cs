@@ -1,7 +1,9 @@
 using Business.Abstracts;
 using Business.Concretes;
+using Core.CrossCuttingConcerns.Exceptions;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework;
+using Core.CrossCuttingConcerns.Exceptions.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,9 @@ builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<IProductRepository, EfProductRepository>();
 builder.Services.AddDbContext<BaseDbContext>();
 
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionMiddlewareExtensions();
 
 app.UseHttpsRedirection();
 

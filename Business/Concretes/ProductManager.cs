@@ -1,8 +1,10 @@
 ﻿using Business.Abstracts;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using DataAccess.Abstracts;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +27,15 @@ namespace Business.Concretes
             // fiyatını kontrol et
 
             if (product.UnitPrice < 0)
-                throw new Exception("Ürün fiyatı 0'dan küçük olamaz.");
+                throw new BusinessException("Ürün fiyatı 0'dan küçük olamaz.");
 
             // Aynı isimde 2. ürün eklenemez.
 
             Product? productWithSameName = await _productRepository.GetAsync(p=>p.Name == product.Name);
             if (productWithSameName is not null)
-                throw new Exception("Aynı isimde 2. ürün eklenemez.");
+                throw new System.Exception("Aynı isimde 2. ürün eklenemez.");
 
-            // Async işlemler
+            // Async işlemler ✅
             // Global Ex. Handling.
             // İş kuralları, Validaton => Daha temiz yazarız?
             // Pipeline Mediator pattern ??
