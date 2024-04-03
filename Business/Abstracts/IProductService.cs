@@ -21,3 +21,4 @@ namespace Business.Abstracts
 // Servisler arası iletişim
 // CQRS
 // Mediator pattern (MediatR)
+// 
