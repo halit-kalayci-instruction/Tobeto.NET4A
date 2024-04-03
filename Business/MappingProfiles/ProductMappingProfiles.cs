@@ -14,6 +14,8 @@ namespace Business.MappingProfiles
         public ProductMappingProfiles()
         {
             CreateMap<Product, ProductForAddDto>().ReverseMap();
+            //.ForMember(i=>i.UnitPrice, opt => opt.MapFrom(dto => dto.Price));
+            CreateMap<Product, ProductForListingDto>().ReverseMap();
         }
     }
 }

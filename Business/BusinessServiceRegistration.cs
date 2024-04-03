@@ -20,5 +20,3 @@ namespace Business
         }
     }
 }
-
-// 2:25
