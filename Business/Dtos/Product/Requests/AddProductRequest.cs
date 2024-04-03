@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Dtos.Product
+namespace Business.Dtos.Product.Requests
 {
-    public class ProductForAddDto
+    public class AddProductRequest
     {
         public string Name { get; set; }
         public double UnitPrice { get; set; }

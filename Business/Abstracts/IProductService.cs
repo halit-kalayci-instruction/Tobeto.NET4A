@@ -1,4 +1,5 @@
-﻿using Business.Dtos.Product;
+﻿using Business.Dtos.Product.Requests;
+using Business.Dtos.Product.Responses;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,12 @@ namespace Business.Abstracts
     public interface IProductService
     {
         Product GetById(int id);
-        Task<List<ProductForListingDto>> GetAll();
-        Task Add(ProductForAddDto dto);
+        Task<List<ListProductResponse>> GetAll();
+        Task Add(AddProductRequest dto);
         void Update(Product product);
         void Delete(int id);
     }
 }
+// Servisler arası iletişim
+// CQRS
+// Mediator pattern (MediatR)
