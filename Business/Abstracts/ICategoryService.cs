@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstracts
 {
-    public interface IProductService
+    public interface ICategoryService
     {
-        
+       
     }
 }

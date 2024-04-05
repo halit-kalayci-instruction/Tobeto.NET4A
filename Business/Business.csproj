@@ -8,11 +8,19 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Categories\" />
+    <Folder Include="Features\Products\Commands\Delete\" />
+    <Folder Include="Features\Products\Commands\Update\" />
+    <Folder Include="Features\Products\Queries\GetById\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Business.Dtos.Product.Requests;
-using Business.Dtos.Product.Responses;
+using Business.Features.Products.Commands.Create;
 using Entities;
 
 namespace Business.MappingProfiles
@@ -9,9 +8,8 @@ namespace Business.MappingProfiles
     {
         public ProductMappingProfiles()
         {
-            CreateMap<Product, AddProductRequest>().ReverseMap();
+            CreateMap<Product, CreateProductCommand>().ReverseMap();
             //.ForMember(i=>i.UnitPrice, opt => opt.MapFrom(dto => dto.Price));
-            CreateMap<Product, ListProductResponse>().ReverseMap();
         }
     }
 }
