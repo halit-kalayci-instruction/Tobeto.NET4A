@@ -36,7 +36,11 @@ namespace Core.CrossCuttingConcerns.Exceptions
                 }
                 else if(exception is ValidationException)
                 {
+                    // Casting
+                    ValidationException validationException = (ValidationException) exception;
+                    ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails(validationException.Errors.ToList());
 
+                    await context.Response.WriteAsync(JsonSerializer.Serialize(validationProblemDetails));
                 }
                 else
                 {
