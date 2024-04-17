@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using Core.Utilities.Hashing;
+using DataAccess.Abstracts;
 using Entities;
 using MediatR;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Business.Features.Auth.Commands.Register
 {
@@ -15,25 +19,26 @@ namespace Business.Features.Auth.Commands.Register
         public class RegisterCommandHandler : IRequestHandler<RegisterCommand>
         {
             private readonly IMapper _mapper;
+            private readonly IUserRepository _userRepository;
 
-            public RegisterCommandHandler(IMapper mapper)
+            public RegisterCommandHandler(IMapper mapper, IUserRepository userRepository)
             {
                 _mapper = mapper;
+                _userRepository = userRepository;
             }
 
-            public Task Handle(RegisterCommand request, CancellationToken cancellationToken)
+            public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
             {
-                // Register komutu trigger olduğunda çalışacak fonk.
-
                 User user = _mapper.Map<User>(request);
 
-                // 2:20
-                user.PasswordHash = null;
-                user.PasswordSalt = null;
+                byte[] passwordHash, passwordSalt;
 
+                HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
 
+                user.PasswordSalt = passwordSalt;
+                user.PasswordHash = passwordHash;
 
-                throw new NotImplementedException();
+                await _userRepository.AddAsync(user);
             }
         }
     }
