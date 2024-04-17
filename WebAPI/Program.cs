@@ -1,6 +1,7 @@
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Business;
 using DataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -18,12 +19,21 @@ builder.Services.AddSwaggerGen();
 // Scoped => (API isteði) Ýstek baþýna 1 instance oluþturur.
 
 // Transient => Her adýmda (her talepte) yeni 1 instance.
-
 builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices();
 
 // Assembly
-
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        // JWT Konfigürasyonlarý..
+        // TODO: Gerekli alanlarý appsettings.json'dan okuyarak burada token optionslarý belirle.
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+        {
+           // IssuerSigningKey = ""
+        };
+    });
 
 
 var app = builder.Build();
@@ -38,6 +48,8 @@ if (app.Environment.IsDevelopment())
 app.ConfigureExceptionMiddlewareExtensions();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
