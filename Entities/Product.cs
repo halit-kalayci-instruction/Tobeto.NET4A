@@ -29,7 +29,3 @@ namespace Entities
         public virtual Category Category { get; set; }
     }
 }
-// Proje Referansları ve Paketleri
-// PMC Default Project DataAccess
-// Connection String
-// 2:20
