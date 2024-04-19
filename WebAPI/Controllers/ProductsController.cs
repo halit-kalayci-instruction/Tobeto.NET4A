@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
     {
         private readonly IMediator _mediator;
 
-        public ProductsController(IMediator mediator)
+        public ProductsController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
         }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using TokenOptions = Core.Utilities.JWT.TokenOptions;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Core.Utilities.Encryption;
-
+using Core;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -27,12 +27,15 @@ builder.Services.AddSwaggerGen();
 // Scoped => (API isteði) Ýstek baþýna 1 instance oluþturur.
 
 // Transient => Her adýmda (her talepte) yeni 1 instance.
+TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices();
+builder.Services.AddCoreServices(tokenOptions);
 
 // Assembly
 
-TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
