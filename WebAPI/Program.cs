@@ -2,6 +2,14 @@ using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Business;
 using DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using TokenOptions = Core.Utilities.JWT.TokenOptions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Core.Utilities.Encryption;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -23,15 +31,22 @@ builder.Services.AddBusinessServices();
 builder.Services.AddDataAccessServices();
 
 // Assembly
+
+TokenOptions? tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // JWT Konfigürasyonlarý..
-        // TODO: Gerekli alanlarý appsettings.json'dan okuyarak burada token optionslarý belirle.
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
         {
-           // IssuerSigningKey = ""
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
         };
     });
 

@@ -17,7 +17,6 @@ namespace Business.Features.Auth.Commands.Login
         public string Email { get; set; }
         public string Password { get; set; }
 
-
         public class LoginCommandHandler : IRequestHandler<LoginCommand>
         {
             private readonly IUserRepository _userRepository;
