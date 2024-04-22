@@ -4,6 +4,7 @@ using Core.Utilities.JWT;
 using DataAccess.Abstracts;
 using Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,16 +23,19 @@ namespace Business.Features.Auth.Commands.Login
         {
             private readonly IUserRepository _userRepository;
             private readonly ITokenHelper _tokenHelper;
+            private readonly IUserOperationClaimRepository _userOperationClaimRepository;
 
-            public LoginCommandHandler(IUserRepository userRepository, ITokenHelper tokenHelper)
+            public LoginCommandHandler(IUserRepository userRepository, ITokenHelper tokenHelper, IUserOperationClaimRepository userOperationClaimRepository)
             {
                 _userRepository = userRepository;
                 _tokenHelper = tokenHelper;
+                _userOperationClaimRepository = userOperationClaimRepository;
             }
 
             public async Task<AccessToken> Handle(LoginCommand request, CancellationToken cancellationToken)
             {
-                User? user = await _userRepository.GetAsync(i => i.Email == request.Email);
+                User? user = await _userRepository.GetAsync(
+                    i => i.Email == request.Email);
 
                 if(user is null)
                 {
@@ -44,8 +48,11 @@ namespace Business.Features.Auth.Commands.Login
                     throw new BusinessException("Giriş başarısız.");
 
                 // Kullanıcı rollerini sorgula.
+                List<UserOperationClaim> userOperationClaims = await _userOperationClaimRepository
+                    .GetListAsync(i => i.UserId == user.Id, include: i => i.Include(i => i.OperationClaim));
 
-                return _tokenHelper.CreateToken(user);
+
+                return _tokenHelper.CreateToken(user, userOperationClaims.Select(i=> (Core.Entities.OperationClaim) i.OperationClaim).ToList());
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using Entities;
+﻿using Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concretes.EntityFramework

@@ -8,3 +8,4 @@ namespace Core.Entities
         public int OperationClaimId { get; set; }
     }
 }
+//

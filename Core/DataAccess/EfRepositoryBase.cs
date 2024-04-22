@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace Core.DataAccess
@@ -35,38 +36,51 @@ namespace Core.DataAccess
 
         // Filter ✅
         // OrderBy ?
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null)
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null,
+                                     Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include=null)
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
 
             if(predicate != null)
                 data = data.Where(predicate);
+            if (include != null)
+                data = include(data);
 
             return data.ToList();
         }
 
         // Filter ✅
         // OrderBy ?
-        public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
+        public TEntity? Get(Expression<Func<TEntity, bool>> predicate,
+                           Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
+
+            if (include != null)
+                data = include(data);
 
             return data.FirstOrDefault(predicate);
         }
 
-        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate,
+                                     Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
+
+            if (include != null)
+                data = include(data);
 
             return await data.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null)
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
             IQueryable<TEntity> data = Context.Set<TEntity>();
 
             if (predicate != null)
                 data = data.Where(predicate);
+            if (include != null)
+                data = include(data);
 
             return await data.ToListAsync();
         }

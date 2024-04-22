@@ -17,6 +17,8 @@ namespace Business.Features.Products.Queries.GetList
         public int PageSize { get; set; }
 
 
+        public string[] RequiredRoles => ["Product.Add","Product.Update"];
+
         public class GetListQueryHandler : IRequestHandler<GetListQuery, List<GetAllProductResponse>>
         {
             private readonly IProductRepository _productRepository;

@@ -1,5 +1,5 @@
 ﻿using Core.DataAccess;
-using Core.Entities;
+using Entities;
 using DataAccess.Abstracts;
 using System;
 using System.Collections.Generic;

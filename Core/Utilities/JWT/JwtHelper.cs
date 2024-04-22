@@ -1,13 +1,8 @@
 ﻿using Core.Entities;
 using Core.Utilities.Encryption;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Core.Utilities.JWT
 {
@@ -19,8 +14,8 @@ namespace Core.Utilities.JWT
         {
             this.tokenOptions = tokenOptions;
         }
-
-        public AccessToken CreateToken(BaseUser user)
+        // 2.10
+        public AccessToken CreateToken(BaseUser user, List<OperationClaim> operationClaims)
         {
             // Özellikleri oku ve token'i yaz.
             DateTime expirationTime = DateTime.Now.AddMinutes(tokenOptions.ExpirationTime);
@@ -31,7 +26,7 @@ namespace Core.Utilities.JWT
             JwtSecurityToken jwt = new JwtSecurityToken(
                 issuer: tokenOptions.Issuer, 
                 audience: tokenOptions.Audience, 
-                claims: null, 
+                claims: SetAllClaims(user, operationClaims.Select(i=>i.Name).ToList()), 
                 notBefore: DateTime.Now,
                 expires: expirationTime,
                 signingCredentials: signingCredentials
@@ -40,6 +35,23 @@ namespace Core.Utilities.JWT
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
             string jwtToken = jwtSecurityTokenHandler.WriteToken(jwt);
             return new AccessToken() { Token = jwtToken, ExpirationTime = expirationTime };
+        }
+
+        protected IEnumerable<Claim> SetAllClaims(BaseUser user, List<string> operationClaims)
+        {
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+
+            foreach (var operationClaim in operationClaims)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, operationClaim));
+            }
+
+            claims.Add(new Claim("Tobeto", "abc"));
+
+            return claims;
         }
     }
 }
