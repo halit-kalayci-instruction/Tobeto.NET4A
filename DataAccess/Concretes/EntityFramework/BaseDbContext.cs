@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Core.Entities;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concretes.EntityFramework
@@ -9,6 +10,8 @@ namespace DataAccess.Concretes.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +24,8 @@ namespace DataAccess.Concretes.EntityFramework
             modelBuilder.Entity<Product>().ToTable("Products");
             modelBuilder.Entity<Product>().HasOne(i => i.Category);
             modelBuilder.Entity<Product>().Property(i => i.Name).HasColumnName("Name").HasMaxLength(50);
+            modelBuilder.Entity<User>().ToTable("Users");
+            //modelBuilder.Entity<UserOperationClaim>()
 
             // Seed Data
            

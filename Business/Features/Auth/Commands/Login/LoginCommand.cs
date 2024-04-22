@@ -43,6 +43,7 @@ namespace Business.Features.Auth.Commands.Login
                 if (!isPasswordMatch)
                     throw new BusinessException("Giriş başarısız.");
 
+                // Kullanıcı rollerini sorgula.
 
                 return _tokenHelper.CreateToken(user);
             }

@@ -34,10 +34,11 @@ namespace Core.CrossCuttingConcerns.Exceptions
                     problemDetails.Type = "BusinessException";
                     await context.Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
                 }
-                else if(exception is ValidationException)
+                else if(exception is ValidationException) // türü ValidationEx. ise
                 {
-                    // Casting
                     ValidationException validationException = (ValidationException) exception;
+
+
                     ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails(validationException.Errors.ToList());
 
                     await context.Response.WriteAsync(JsonSerializer.Serialize(validationProblemDetails));
